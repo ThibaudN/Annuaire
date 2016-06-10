@@ -10,10 +10,9 @@ ini_set('display_errors','1');
 error_reporting(E_ALL);
 #
 include __DIR__."/php-include/f_base.php";#base
-include __DIR__."/php-include/d_base.php";#constantes de base
-include __DIR__."/php-include/d_sql.php";#identifisant sql
+include __DIR__."/php-include/d_config.php";#base
 include __DIR__."/php-include/c_pdo.php";#class pdo
-include __DIR__."/php-include/c_email.php";#keygen
+include __DIR__."/php-include/c_email.php";#email
 #
 $oSql = mypdo::GetInstance(DB_HOST,DB_LOGIN,DB_PASS,DB_BASE);
 $rR = "SELECT * FROM ".S_CONFIG." where id = 1";

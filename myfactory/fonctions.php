@@ -9,10 +9,9 @@ ini_set('display_errors','1');
 error_reporting(E_ALL);
 #
 include __DIR__."/../php-include/f_base.php";#base
-include __DIR__."/../php-include/d_base.php";#constantes de base
-include __DIR__."/../php-include/d_sql.php";#identifisant sql
+include __DIR__."/../php-include/d_config.php";#base
 include __DIR__."/../php-include/c_pdo.php";#class pdo
-include __DIR__."/../php-include/c_email.php";#class email
+include __DIR__."/../php-include/c_email.php";#email
 session_start();
 #
 header("Content-Type: text/html; charset=UTF-8");

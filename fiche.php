@@ -26,9 +26,7 @@ $aHead = array(
 	'MetaDescription' => s($sR['MetaDescription'])
 );
 head($aHead);
-echo '<div class="row">
-<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><h2>'.hs($sR['Titre']).'</h2>
-<img src="'.$sR['Image'].'" alt="'.hs($sR['Titre']).'" class="img-responsive pull-right" style="max-width:350px;margin-left:20px;" />'.nl2br(hs($sR['Description2'])).'';
+echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><h2>'.hs($sR['Titre']).'</h2><img src="'.$sR['Image'].'" alt="'.hs($sR['Titre']).'" class="img-responsive pull-right" style="max-width:350px;margin-left:20px;" />'.nl2br(hs($sR['Description2'])).'';
 
 
 #autre fiches meme catégories ?
