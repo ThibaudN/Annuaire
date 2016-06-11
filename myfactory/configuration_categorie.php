@@ -251,13 +251,11 @@ elseif(!empty($_GET['id']) and is_numeric($_GET['id'])) {
 }
 
 
-
-
 echo '<h2>Les catégories</h2>
 <table class="table table-striped"><thead><tr><th width="6%">id</th><th>Nom</th><th>NomUrl</th><th>Site</th><th>Etat</th><th width="10%">&nbsp;</th></tr></thead><tbody>';
 $rR = "SELECT * FROM ".S_CATEGORIES." WHERE 1 order by Titre asc";
 foreach($oSql->GetAll($rR) as $k => $v) {
-	echo '<tr><td><a href="'.PAGE.'?id='.$v['id'].'" title="Voir">#'.s($v['id']).'</a></td><td><a href="'.PAGE.'?id='.$v['id'].'" title="Voir">'.s($v['Titre']).'</a></td><td><a href="'.PAGE.'?id='.$v['id'].'" title="Voir">'.s($v['TitreUrl']).'</a></td><td><a href="'.PAGE.'?id='.$v['id'].'" title="Voir">'.s($v['Sites']).'</a></td><td><span class="label label-'.$aClassCategories[$v['Online']].'">'.s($aEtatCategories[$v['Online']]).'</span></td><td><a href="'.PAGE.'?id='.$v['id'].'" title="Voir" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Voir</a></td></tr>';
+	echo '<tr><td>#'.s($v['id']).'</td><td>'.s($v['Titre']).'</td><td>'.s($v['TitreUrl']).'</td><td>'.s($v['Sites']).'</td><td><span class="label label-'.$aClassCategories[$v['Online']].'">'.s($aEtatCategories[$v['Online']]).'</span></td><td><a href="'.PAGE.'?id='.$v['id'].'" title="Voir" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Voir</a></td></tr>';
 }
 echo '</tbody></table>';
 

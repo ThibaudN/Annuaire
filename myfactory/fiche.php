@@ -302,15 +302,14 @@ echo '</div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 <h2>Action</h2>
 <a href="'.PAGE.'" title="Retour" class="btn btn-block btn-default"><i class="fa fa-arrow-left"></i> Retour</a>';
 if($sR['Etat'] >= 1 and $sR['Etat'] <= 3) {
-	if($sR['Etat'] == 1)
+	if($sR['Etat'] == 1) {
 		echo '<a href="'.$sUrlInterne.'" title="Voir sur le site" target="_blank" class="btn btn-block btn-success"><i class="fa fa-eye"></i> Voir</a><a href="'.PAGE.'?id='.$sR['id'].'&modif=1#form" title="Modifier" class="btn btn-block btn-primary"><i class="fa fa-edit"></i> Modifier</a>';
 	$rR = "SELECT * FROM ".S_SIDEBAR." WHERE Lien = ?";
 	$aArg = array($sUrlInterne);
 	$sRSidebar = $oSql->GetLine($rR,$aArg);
 	if(empty($sRSidebar))
-		echo '<a href="configuration_sidebar.php?nFiche='.$sR['id'].'" class="btn btn-block btn-warning"><i class="fa fa-star"></i> Mettre en avant</a>';
-	
-	
+		echo '<a href="configuration_sidebar.php?nFiche='.$sR['id'].'#form" class="btn btn-block btn-warning"><i class="fa fa-star"></i> Mettre en avant</a>';
+	}
 }
 elseif($sR['Etat'] == 5)
 	echo '<a href="'.PAGE.'?id='.$sR['id'].'&email=1" title="Renvoyer email" class="btn btn-block btn-warning"><i class="fa fa-envelope"></i> Renvoyer email</a><a href="'.PAGE.'?id='.$sR['id'].'&emailsaute=1" title="Simuler email" class="btn btn-block btn-warning"><i class="fa fa-share"></i> Simuler email</a>';
