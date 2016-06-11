@@ -2,9 +2,6 @@
 $sPath = pathinfo($_SERVER['PHP_SELF']); 
 define('PAGE', $sPath['basename']);
 require __DIR__."/fonctions.php";
-
-#<img src="http://api.thumbsniper.com/v3/thumbnail/300/plain/?url=https://www.thumbsniper.com" alt="ThumbSniper.com" title="ThumbSniper.com" />
-
 /*
 if(!empty($_GET['actionRecherche']) and is_numeric($_GET['actionRecherche'])) {
 	if(empty($_POST['Rechercher'])) {
