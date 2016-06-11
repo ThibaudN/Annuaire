@@ -18,7 +18,7 @@ if(!empty($_GET['actionRecherche']) and is_numeric($_GET['actionRecherche'])) {
 
 $aHead = array(
 	'PageTitre' => s($sRConfig['HomeMetaTitle']),
-	'MetaRobots' => 'noindex,nofollow',
+	'MetaRobots' => 'index,follow',
 	'MetaKeyword' => '',
 	'MetaDescription' => s($sRConfig['HomeMetaDescription'])
 );
