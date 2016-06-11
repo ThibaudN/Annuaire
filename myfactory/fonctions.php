@@ -9,7 +9,7 @@ ini_set('display_errors','1');
 error_reporting(E_ALL);
 #
 if(!file_exists(__DIR__."/../php-include/d_config.php")) {
-	header('location: z_i.php');
+	header('location: /z_i.php');
 	exit;
 }
 include __DIR__."/../php-include/f_base.php";#base
