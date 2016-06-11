@@ -127,16 +127,19 @@ elseif(!empty($_GET['action']) and is_numeric($_GET['action'])) {
 	$sKeyGen = KeyGen(32);
 	$sKeyGenMail = KeyGen(5);
 	$sUrlDebut = substr($sUrl,0,7);
+	$sUrlTitre = substr($sUrl,7);
 	if($sUrlDebut == 'http://')
 		$sTitreUrl = substr($sUrl,7);
-	else
+	else {
 		$sTitreUrl = substr($sUrl,8);
+		$sUrlTitre = substr($sUrl,8);
+	}
 	$sTitreUrl = clean_url($sTitreUrl);
 	$sIp = GetIp();
 	$sMail = $_POST['Mail'];
 	
 	$sMetaTitle = $_POST['Titre'];
-	$sMetaDescription = 'Nous vous présentons le site internet '.substr($sUrl,8).' référencé dans la catégorie '.s($aCategories[hs($_POST['Categorie'])]['Titre']);
+	$sMetaDescription = 'Nous vous présentons le site internet '.$sUrlTitre.' référencé dans la catégorie '.s($aCategories[hs($_POST['Categorie'])]['Titre']);
 	
 	$rR = "INSERT INTO ".S_FICHES." (idCategorie,Url,Titre,TitreUrl,Description1,Description2,MetaTitle,MetaDescription,Mail,KeyGen,KeyGenMail,Ip,Date,Etat) values (?,?,?,?,?,?,?,?,?,?,?,?,now(),5)";
 	$aArg = array($_POST['Categorie'],$sUrl,$_POST['Titre'],$sTitreUrl,$_POST['Description1'],$_POST['Description2'],$sMetaTitle,$sMetaDescription,$sMail,$sKeyGen,$sKeyGenMail,$sIp);

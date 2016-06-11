@@ -51,11 +51,31 @@ elseif(!empty($_GET['accepter']) and is_numeric($_GET['accepter'])) {
 		header('location: '.PAGE.'?id='.$sR['id']);
 		exit;
 	}
-	$rR = "UPDATE ".S_FICHES." SET Etat = 2,DateValidation = now() where id = ?";
-	$aArg = array($sR['id']);
-	$oSql->Query($rR,$aArg);
+	/*SCREENSHOT BY THIBAUD*/
+	#$rR = "UPDATE ".S_FICHES." SET Etat = 2,DateValidation = now() where id = ?";
+	#$aArg = array($sR['id']);
+	#$oSql->Query($rR,$aArg);
+	#$_SESSION['ADMConnected']['Done'] = 'La fiche a été validée. Elle sera en ligne après génération de la miniature';
 	
-	$_SESSION['ADMConnected']['Done'] = 'La fiche a été validée. Elle sera en ligne après génération de la miniature';
+	/*SCREENSHOT PAR UN TIERS*/
+	$sImage = 'http://api.thumbsniper.com/v3/thumbnail/450/plain/?url='.s($sR['Url']);
+	$rR = "UPDATE ".S_FICHES." SET Image = ?,Etat = 1,DateValidation = now() where id = ?";
+	$aArg = array($sImage,$sR['id']);
+	$oSql->Query($rR,$aArg);
+	#mise à jour catégorie
+	CalculSiteCategorie();
+	#envoie email
+	$sLien = URLSITE.$aCategories[$sR['idCategorie']]['TitreUrl'].'/'.hs($sR['TitreUrl']).'.html';
+	$sSujet = 'site accepté';
+	$sBodyHTML = file_get_contents('../php-include/emails/inscription_acceptee.php',FILE_USE_INCLUDE_PATH);
+	$sBodyHTML = str_replace("::DOMAINE",NOMDOMAINE,$sBodyHTML);
+	$sBodyHTML = str_replace("::OBJET",$sSujet,$sBodyHTML);
+	$sBodyHTML = str_replace("::SITE",$sR['Url'],$sBodyHTML);
+	$sBodyHTML = str_replace("::LIEN",$sLien,$sBodyHTML);
+	$sBody = "Bonjour !\n\nVous avez inscrit votre site ".$sR['Url']." dans notre annuaire ".NOMDOMAINE.".\nVotre site a été accepté. Voici son url personnalisée : ".$sLien."\n\n";
+	$aMail = array('FromMail' => MAILEXPEDITEUR,'FromName' => NOMDOMAINE,'Subject' => NOMDOMAINE.' - '.$sSujet,'Text' => $sBody,'TextHTML' => $sBodyHTML,'Email' => $sR['Mail']);
+	myMail($aMail);
+	$_SESSION['ADMConnected']['Done'] = 'La fiche a été validée. La miniature peut mettre 5 minutes à se générer.';
 	header('location: '.PAGE.'?id='.$sR['id']);
 	exit;
 }
