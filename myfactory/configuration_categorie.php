@@ -241,7 +241,6 @@ if(!empty($_GET['form']) and is_numeric($_GET['form'])) {
 	echo '<h2>'.$sBtn.' une catégorie</h2><form method="post" action="'.PAGE.'?'.$sAct.'=1">'.$sHidden.'<div class="form-group"><label for="Titre" class="control-label">Titre</label><input type="text" name="Titre" id="Titre" class="form-control" value="'.$sTitre.'" required></div><div class="form-group"><label for="TitreUrl" class="control-label">Url interne</label><input type="text" name="TitreUrl" id="TitreUrl" class="form-control" value="'.$sTitreUrl.'" required></div><div class="form-group"><label for="ParPage" class="control-label">Items par Page</label><input type="text" name="ParPage" id="ParPage" class="form-control" value="'.$sParPage.'" required></div><div class="form-group"><label for="Description" class="control-label">Description</label><textarea name="Description" id="Description" class="form-control" placeholder="Cette description affichée sur sa page de catégorie" cols="40" rows="8" required>'.$sDescription.'</textarea></div><div class="form-group"><label for="MetaTitle" class="control-label">Meta Title</label><input type="text" name="MetaTitle" id="MetaTitle" class="form-control" value="'.$sMetaTitle.'" placeholder="balise html title" required></div><div class="form-group"><label for="MetaDescription" class="control-label">Meta Description</label><textarea name="MetaDescription" id="MetaDescription" class="form-control" placeholder="balise meta description" cols="40" rows="8" required>'.$sMetaDescription.'</textarea></div><button type="submit" class="btn btn-primary btn-block">'.$sBtn.' la catégorie</button></form><hr />';
 }
 
-
 elseif(!empty($_GET['id']) and is_numeric($_GET['id'])) {
 	$rR = "SELECT * FROM ".S_CATEGORIES." WHERE id = ?";
 	$aArg = array($_GET['id']);
@@ -250,12 +249,15 @@ elseif(!empty($_GET['id']) and is_numeric($_GET['id'])) {
 		echo '<h2>La catégorie '.$aCat['Titre'].'</h2><table class="table table-striped"><tbody><tr><td width="20%">Titre</td><td>'.hs($aCat['Titre']).'</td></tr><tr><td>Url</td><td>'.hs($aCat['TitreUrl']).'</td></tr><tr><td>Items par page</td><td>'.hs($aCat['ParPage']).'</td></tr><tr><td>Etat</td><td><span class="label label-'.$aClassCategories[$aCat['Online']].'">'.s($aEtatCategories[$aCat['Online']]).'</span></td></tr><tr><td>Sites en ligne</td><td>'.hs($aCat['Sites']).'</td></tr><tr><td>Description</td><td>'.hs($aCat['Description']).'</td></tr><tr><td>Meta Title</td><td>'.hs($aCat['MetaTitle']).'</td></tr><tr><td>Meta Description</td><td>'.hs($aCat['MetaDescription']).'</td></tr></tbody></table><hr />';
 }
 
-
 echo '<h2>Les catégories</h2>
 <table class="table table-striped"><thead><tr><th width="6%">id</th><th>Nom</th><th>NomUrl</th><th>Site</th><th>Etat</th><th width="10%">&nbsp;</th></tr></thead><tbody>';
 $rR = "SELECT * FROM ".S_CATEGORIES." WHERE 1 order by Titre asc";
 foreach($oSql->GetAll($rR) as $k => $v) {
-	echo '<tr><td>#'.s($v['id']).'</td><td>'.s($v['Titre']).'</td><td>'.s($v['TitreUrl']).'</td><td>'.s($v['Sites']).'</td><td><span class="label label-'.$aClassCategories[$v['Online']].'">'.s($aEtatCategories[$v['Online']]).'</span></td><td><a href="'.PAGE.'?id='.$v['id'].'" title="Voir" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Voir</a></td></tr>';
+	echo '<tr><td>#'.s($v['id']).'</td><td>'.s($v['Titre']);
+	if(empty($v['MetaTitle']) or empty($v['MetaDescription']))
+		echo ' <i class="fa fa-exclamation-triangle" title="Meta title et/ou description vide"></i>';
+	
+	echo '</td><td>'.s($v['TitreUrl']).'</td><td>'.s($v['Sites']).'</td><td><span class="label label-'.$aClassCategories[$v['Online']].'">'.s($aEtatCategories[$v['Online']]).'</span></td><td><a href="'.PAGE.'?id='.$v['id'].'" title="Voir" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Voir</a></td></tr>';
 }
 echo '</tbody></table>';
 

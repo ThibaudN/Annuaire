@@ -146,8 +146,7 @@ elseif(!empty($_GET['action']) and is_numeric($_GET['action'])) {
 	$oSql->Query($rR,$aArg);
 	MailInscription($sKeyGenMail,$sMail);
 	unset($_SESSION['Deconnected']);
-	$_SESSION['Connected']['idUnique'] = $sKeyGenMail;
-	
+	$_SESSION['Connected']['idUnique'] = $sKeyGen;
 	header('location: proposerunsite_mail.php');
 	exit;
 }
