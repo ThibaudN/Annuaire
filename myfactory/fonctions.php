@@ -8,6 +8,10 @@ ini_set('date.timezone', 'Europe/Paris');
 ini_set('display_errors','1');
 error_reporting(E_ALL);
 #
+if(!file_exists(__DIR__."/../php-include/d_config.php")) {
+	header('location: z_i.php');
+	exit;
+}
 include __DIR__."/../php-include/f_base.php";#base
 include __DIR__."/../php-include/d_config.php";#base
 include __DIR__."/../php-include/c_pdo.php";#class pdo

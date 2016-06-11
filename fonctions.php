@@ -13,7 +13,6 @@ if(!file_exists(__DIR__."/php-include/d_config.php")) {
 	header('location: z_i.php');
 	exit;
 }
-
 include __DIR__."/php-include/f_base.php";#base
 include __DIR__."/php-include/d_config.php";#base
 include __DIR__."/php-include/c_pdo.php";#class pdo
@@ -26,8 +25,8 @@ header("Content-Type: text/html; charset=UTF-8");
 $oSql = mypdo::GetInstance(DB_HOST,DB_LOGIN,DB_PASS,DB_BASE);
 $rR = "SELECT * FROM ".S_CONFIG." where id = 1";
 $sRConfig = $oSql->GetLine($rR);
-
-
+if(empty($sRConfig['isConfig']))
+	die('Vous n\'avez pas fini la configuration dans le backoffice');
 
 #categories
 $rR = "SELECT * FROM ".S_CATEGORIES." WHERE Online = 1 order by Titre asc";
@@ -85,7 +84,6 @@ function bot($aBot = array()) {
 	if(PAGE == 'proposerunsite.php') {
 		echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script><script type="text/javascript">$(document).ready(function() {$(\'#Description1\').keyup(function() {var nombreCaracteres = $(this).val().length;var nombreMots = jQuery.trim($(this).val()).split(\' \').length;if($(this).val() === \'\') { nombreMots = 0; }var msgCaracteres = \' \'+nombreCaracteres+\' caractère\';if(nombreCaracteres > 1) { var msgCaracteres = \' \'+nombreCaracteres+\' caractères\'; }var msgMots = \' \'+nombreMots+\' mot\';if(nombreMots > 1) { var msgMots = \' \'+nombreMots+\' mots\'; }$(\'#CompteurMotDescription1\').text(msgMots);$(\'#CompteurCarDescription1\').text(msgCaracteres);if(nombreCaracteres < '.$sRConfig['CaracteresMinDescription1'].' || nombreCaracteres > '.$sRConfig['CaracteresMaxDescription1'].') { $("#CompteurMotDescription1").attr(\'style\', \'color:red;\');$("#CompteurCarDescription1").attr(\'style\', \'color:red;\'); }else { $("#CompteurMotDescription1").attr(\'style\', \'color:green;\');$("#CompteurCarDescription1").attr(\'style\', \'color:green;\'); }});$(\'#Description2\').keyup(function() {var nombreCaracteres = $(this).val().length;var nombreMots = jQuery.trim($(this).val()).split(\' \').length;if($(this).val() === \'\') { nombreMots = 0; }var msgCaracteres = \' \'+nombreCaracteres+\' caractère\';if(nombreCaracteres > 1) { var msgCaracteres = \' \'+nombreCaracteres+\' caractères\'; }var msgMots = \' \'+nombreMots+\' mot\';if(nombreMots > 1) { var msgMots = \' \'+nombreMots+\' mots\'; }$(\'#CompteurMotDescription2\').text(msgMots);$(\'#CompteurCarDescription2\').text(msgCaracteres);if(nombreCaracteres < '.$sRConfig['CaracteresMinDescription2'].' || nombreCaracteres > '.$sRConfig['CaracteresMaxDescription2'].') { $("#CompteurMotDescription2").attr(\'style\', \'color:red;\');$("#CompteurCarDescription2").attr(\'style\', \'color:red;\'); }else { $("#CompteurMotDescription2").attr(\'style\', \'color:green;\');$("#CompteurCarDescription2").attr(\'style\', \'color:green;\'); }});});</script>';
 	}
-	
 	echo '</body></html>';
 }
 
@@ -97,7 +95,6 @@ function AfficherFiche($v) {
 	$sDescription = hs($v['Description1']);
 	echo '<div class="media"><div class="media-left"><img class="media-object" src="'.$sImage.'" alt="'.$sTitre.'" style="width:200px;" /></div><div class="media-body"><h3 class="media-heading">'.$sTitre.'</h3><p>'.$sDescription.'</p><p><span class="pull-right"><a href="'.$sUrl.'" title="'.$sTitre.'">Voir la fiche</a></span></p></div></div>';
 }
-
 
 function GoogleAnalytics() {
 	global $sRConfig;

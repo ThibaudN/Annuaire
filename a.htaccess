@@ -1,60 +1,9 @@
-<Files ~ (\.pl)>
-Options ExecCGI FollowSymLinks
-</Files>
 RewriteEngine on
 RewriteBase /
-#ForcerWWW
-RewriteCond %{HTTP_HOST} !^a1.entre-youtubeur.com$ [NC]
-RewriteRule ^(.*)$ http://a1.entre-youtubeur.com/$1 [QSA,L,R=301]
 #fiche
 RewriteRule ^([a-zA-Z0-9-]{3,23})/([a-zA-Z0-9-]{1,80})\.html$ /fiche.php?sFiche=$2&sCat=$1 [L]
 #catégories / listing
 RewriteRule ^([a-zA-Z0-9-]{3,23})-page-([0-9]{1,4})\.html$ /categorie.php?id=$1&nPage=$2 [L]
 RewriteRule ^([a-zA-Z0-9-]{3,23})\.html$ /categorie.php?id=$1 [L]
-
 #404
 ErrorDocument 404 /404.php
-
-
-
-# contrôle du cache navigateur - Expire headers
-<IfModule mod_expires.c>
-ExpiresActive On
-ExpiresDefault "access plus 7200 seconds"
-ExpiresByType image/jpg "access plus 1 week"
-ExpiresByType image/jpeg "access plus 1 week"
-ExpiresByType image/png "access plus 1 week"
-ExpiresByType image/gif "access plus 1 week"
-ExpiresByType image/svg+xml "access plus 1 week"
-AddType image/x-icon .ico
-ExpiresByType image/ico "access plus 1 week"
-ExpiresByType image/icon "access plus 1 week"
-ExpiresByType image/x-icon "access plus 1 week"
-ExpiresByType text/css "access plus 1 week"
-ExpiresByType text/javascript "access plus 1 week"
-ExpiresByType text/html "access plus 7200 seconds"
-ExpiresByType application/xhtml+xml "access plus 7200 seconds"
-ExpiresByType application/javascript "access plus 1 week"
-ExpiresByType application/x-javascript "access plus 1 week"
-ExpiresByType application/x-shockwave-flash "access plus 1 week"
-</IfModule>
-
-<IfModule mod_headers.c>
-
-<FilesMatch "\\.(ico|jpe?g|png|gif|swf)$">
-Header set Cache-Control "max-age=2592000, public"
-</FilesMatch>
-
-<FilesMatch "\\.(css)$">
-Header set Cache-Control "max-age=604800, public"
-</FilesMatch>
-
-<FilesMatch "\\.(js)$">
-Header set Cache-Control "max-age=216000, private"
-</FilesMatch>
-
-<FilesMatch "\\.(x?html?|php)$">
-Header set Cache-Control "max-age=600, private, must-revalidate"
-</FilesMatch>
-
-</IfModule>

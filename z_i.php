@@ -45,7 +45,7 @@ if(!empty($_GET['action']) and is_numeric($_GET['action'])) {
 	$sFicherConfig .= '$sNomDomaine = \''.$_POST['Url'].'\';'."\n";
 	$sFicherConfig .= 'define(\'NOMDOMAINE\', $sNomDomaine);'."\n";
 	$sFicherConfig .= '#url sites'."\n";
-	$sFicherConfig .= 'define(\'URLSITE\', \'http://\'.$sNomDomaine.\'\');'."\n";
+	$sFicherConfig .= 'define(\'URLSITE\', \'http://\'.$sNomDomaine.\'/\');'."\n";
 	$sFicherConfig .= 'define(\'URLSITECSS\', \'http://\'.$sNomDomaine.\'/static/\');'."\n";
 	$sFicherConfig .= 'define(\'URLSITEADM\', \'http://\'.$sNomDomaine.\'/myfactory/\');'."\n";
 	$sFicherConfig .= '#mail'."\n";
@@ -86,6 +86,7 @@ if(!empty($_GET['action']) and is_numeric($_GET['action'])) {
 	    }
 	}
 	$_SESSION['ADMConnected']['bCon'] = 1;
+	$_SESSION['ADMConnected']['Done'] = 'Tout s\'est bien passé ! Merci de définir les paramètres ci-dessous pour terminer l\'installation.';
 	header('location: /myfactory/configuration.php');
 	exit;
 }
@@ -98,7 +99,7 @@ $sUrl = '';
 $sMailExpediteur = '';
 $sMotDePasse = '$@lùtçàvà';
 if(isset($_SERVER['HTTP_HOST'])) {
-	$sUrl = $_SERVER['HTTP_HOST'];
+	$sUrl = $_SERVER['HTTP_HOST'].'/';
 	$aDomaine = explode('.',$_SERVER['HTTP_HOST']);
 	$nCount = count($aDomaine);
 	$sDomaine = $aDomaine[$nCount-2].'.'.$aDomaine[$nCount-1];
@@ -108,7 +109,7 @@ $sSqlHost = 'localhost';
 $sSqlBase = 'myAnnuaire';
 $sSqlUser = 'myAnnuaire';
 $sSqlMotDePasse = '';
-$sSqlPrefix = 'Annuaire';
+$sSqlPrefix = 'Annuaire_';
 if(!empty($_SESSION['Install']['Erreur'])) {
 	$sDomaine = $_SESSION['Install']['Domaine'];
 	$sUrl = $_SESSION['Install']['Url'];
