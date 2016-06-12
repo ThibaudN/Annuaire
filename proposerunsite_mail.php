@@ -62,7 +62,7 @@ elseif(!empty($_GET['actionCode']) and is_numeric($_GET['actionCode'])) {
 $aHead = array('PageTitre' => 'Proposer un site','MetaRobots' => 'noindex','MetaKeyword' => '','MetaDescription' => '');
 head($aHead);
 
-echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><h2>Validation de votre adresse email</h2>';
+echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><div class="content"><div class="content-box"><div class="content-box-body"><h2 class="page">Validation de votre adresse email</h2>';
 if(!empty($_SESSION['Connected']['Done'])) {
 	echo '<div class="alert alert-success"><p>'.$_SESSION['Connected']['Done'].'</p></div>';
 	unset($_SESSION['Connected']['Done']);
@@ -71,9 +71,9 @@ elseif(!empty($_SESSION['Connected']['Erreur'])) {
 	echo '<div class="alert alert-danger"><p>'.$_SESSION['Connected']['Erreur'].'</p></div>';
 	unset($_SESSION['Connected']['Erreur']);
 }
-echo '<div class="alert alert-warning"><p>Un email vous a été envoyé ('.$sR['Mail'].') qui contient un code à 5 lettres.</p></div><form method="post" action="'.PAGE.'?actionCode=1"><div class="form-group"><label>Entrez le code reçu</label><input type="text" name="Code" class="form-control" required="required" placeholder="Entrez le code à 5 lettres envoyé par email"></div><button type="submit" class="btn btn-primary btn-block">Valider</button></form><p class="text-center"><br />L\'email peut mettre jusqu\'à 5 minutes pour arriver et se trouvera <strong>certainement</strong> dans vos courriers indésirables / spams. Si l\'adresse n\'est pas la bonne, vous pouvez la changer dans le formulaire ci-contre.</p><hr /><h2>Changer mon adresse email</h2><div class="alert alert-warning"><p>Si votre adresse email est fausse vous pouvez la changer via le formulaire ci-dessous</p></div><form method="post" action="'.PAGE.'?actionEmail=1"><div class="form-group"><label>Adresse Email</label><input type="email" name="Mail" class="form-control" required="required" placeholder="" value="'.$sR['Mail'].'"></div><button type="submit" class="btn btn-primary btn-block">Changer mon adresse email</button></form>';
+echo '<div class="alert alert-warning"><p>Un email vous a été envoyé ('.$sR['Mail'].') qui contient un code à 5 lettres.</p></div><form method="post" action="'.PAGE.'?actionCode=1"><div class="form-group"><label>Entrez le code reçu</label><input type="text" name="Code" class="form-control" required="required" placeholder="Entrez le code à 5 lettres envoyé par email"></div><button type="submit" class="btn btn-primary btn-block">Valider</button></form><p class="text-center"><br />L\'email peut mettre jusqu\'à 5 minutes pour arriver et se trouvera <strong>certainement</strong> dans vos courriers indésirables / spams. Si l\'adresse n\'est pas la bonne, vous pouvez la changer dans le formulaire ci-contre.</p></div></div><div class="content-box"><div class="content-box-body"><h2 class="page">Changer mon adresse email</h2><div class="alert alert-warning"><p>Si votre adresse email est fausse vous pouvez la changer via le formulaire ci-dessous</p></div><form method="post" action="'.PAGE.'?actionEmail=1"><div class="form-group"><label>Adresse Email</label><input type="email" name="Mail" class="form-control" required="required" placeholder="" value="'.$sR['Mail'].'"></div><button type="submit" class="btn btn-primary btn-block">Changer mon adresse email</button></form>';
 
-echo '</div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';
+echo '</div></div></div></div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';
 #sidebar
 $nIncludeSidebar = 1;
 include __DIR__.'/sidebar.php';

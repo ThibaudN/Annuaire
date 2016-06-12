@@ -25,7 +25,7 @@ elseif(!empty($_GET['saute'])) {
 $aHead = array('PageTitre' => 'Proposer un site','MetaRobots' => 'noindex','MetaKeyword' => '','MetaDescription' => '');
 head($aHead);
 
-echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><h2>Paiement</h2>';
+echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><div class="content"><div class="content-box"><div class="content-box-body"><h2 class="page">Paiement</h2>';
 if(!empty($_GET['done']) and is_numeric($_GET['done'])) {
 	echo '<div class="alert alert-success"><p>Votre paiement a bien été effectué. Votre site sera validé dans les 24 heures.</p><p>Vous allez être redirigé dans quelques secondes.</p></div><script type="text/javascript">setTimeout(myRedirect, 6000); function myRedirect() {document.location = \''.PAGE.'\';}</script>';
 }
@@ -40,10 +40,10 @@ else {
 		echo '<div class="alert alert-warning"><p>Votre fiche est en attente de modération.</p></div>';
 	}
 
-	echo '<hr /><h2>Votre fiche</h2><p><strong>Catégorie</strong> :: '.hs($aCategories[$sR['idCategorie']]['Titre']).'<br /><strong>Url</strong> :: '.hs($sR['Url']).'<br /><strong>Titre</strong> :: '.hs($sR['Titre']).'<br /><br /><strong>Description Courte</strong> :: '.nl2br(hs($sR['Description1'])).'<br /><br /><strong>Description Longue</strong> :: '.nl2br(hs($sR['Description2'])).'<br />';
+	echo '</div></div><div class="content-box"><div class="content-box-body"><h2>Votre fiche</h2><p><strong>Catégorie</strong> :: '.hs($aCategories[$sR['idCategorie']]['Titre']).'<br /><strong>Url</strong> :: '.hs($sR['Url']).'<br /><strong>Titre</strong> :: '.hs($sR['Titre']).'<br /><br /><strong>Description Courte</strong> :: '.nl2br(hs($sR['Description1'])).'<br /><br /><strong>Description Longue</strong> :: '.nl2br(hs($sR['Description2'])).'<br />';
 }
 
-echo '</div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';
+echo '</div></div></div></div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';
 #sidebar
 $nIncludeSidebar = 1;
 include __DIR__.'/sidebar.php';

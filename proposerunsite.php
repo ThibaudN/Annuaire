@@ -120,7 +120,7 @@ elseif(!empty($_GET['action']) and is_numeric($_GET['action'])) {
 	}
 	elseif(verifUrl($sUrl) == false) {
 		GetData();
-		$_SESSION['Deconnected']['ProposerUnSite']['Erreur'] = "L'url que vous avez fournit n\'a pas passé le filtre de notre vérification...";
+		$_SESSION['Deconnected']['ProposerUnSite']['Erreur'] = 'L\'url que vous avez fournit n\'a pas passé le filtre de notre vérification...';
 		header('location: '.PAGE.'');
 		exit;
 	}
@@ -154,12 +154,12 @@ elseif(!empty($_GET['action']) and is_numeric($_GET['action'])) {
 
 $aHead = array('PageTitre' => 'Proposer un site','MetaRobots' => 'noindex','MetaKeyword' => '','MetaDescription' => '');
 head($aHead);
-echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">';
+echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><div class="content"><div class="content-box"><div class="content-box-body">';
 
 #affichage des régles
 if(empty($_SESSION['Deconnected']['Regle'])) {
 	#afficher les regles
-	echo '<h2>Les règles pour proposer son site</h2>'.s($sRConfig['Regles']).'<a href="'.PAGE.'?actionRegles=1" title="Accepter les règles" rel="nofollow" class="btn btn-primary btn-block">Accepter les règles</a>';
+	echo '<h2 class="page">Les règles pour proposer son site</h2>'.s($sRConfig['Regles']).'<a href="'.PAGE.'?actionRegles=1" title="Accepter les règles" rel="nofollow" class="btn btn-primary btn-block">Accepter les règles</a>';
 }
 else {
 	$rR = "SELECT * FROM ".S_ANTIROBOTS." ORDER BY RAND() LIMIT 1";
@@ -173,7 +173,7 @@ else {
 	$sDescription2 = '';
 	$sMail = '';
 	$sQuestion = '';
-	echo '<h2>Proposer un site</h2>';
+	echo '<h2 class="page">Proposer un site</h2>';
 
 	echo '<div class="alert alert-warning">Proposer son site est payant.</div>';
 
@@ -203,7 +203,9 @@ else {
 	echo '</select></div><div class="form-group"><label for="Url" class="control-label">Url du site</label><input type="text" name="Url" id="Url" class="form-control" value="'.$sUrl.'" placeholder="http://www.example.com" required></div><div class="form-group"><label for="Titre" class="control-label">Titre</label><input type="text" name="Titre" id="Titre" class="form-control" value="'.$sTitre.'" required></div><div class="form-group"><label for="Description1" class="control-label">Description Courte</label><textarea name="Description1" id="Description1" class="form-control" placeholder="Description de '.$sRConfig['CaracteresMinDescription1'].' caractères minimum. Description affichée sur les pages de catégories" cols="40" rows="8" required>'.$sDescription1.'</textarea><span class="help-block"><span id="CompteurMotDescription1">'.$nDescriptionMots1.' mot</span> - <span id="CompteurCarDescription1">'.$nDescriptionCaracteres1.' caractère</span> / '.$sRConfig['CaracteresMaxDescription1'].' - html et liens interdits</span></div><div class="form-group"><label for="Description2" class="control-label">Description Longue</label><textarea name="Description2" id="Description2" class="form-control" placeholder="Description de '.$sRConfig['CaracteresMinDescription2'].' caractères minimum. Description dédiée à la page de votre site" cols="40" rows="8" required>'.$sDescription2.'</textarea><span class="help-block"><span id="CompteurMotDescription2">'.$nDescriptionMots2.' mot</span> - <span id="CompteurCarDescription2">'.$nDescriptionCaracteres2.' caractère</span> / '.$sRConfig['CaracteresMaxDescription2'].' - html et liens interdits</span></div><div class="form-group"><label for="Mail" class="control-label">Votre adresse email</label><input type="text" name="Mail" id="Mail" class="form-control" value="'.$sMail.'" required></div><div class="form-group"><label for="Question" class="control-label">Question : '.hs($sRQuestion['Question']).'</label><input type="text" name="Question" id="Question" class="form-control" value="" required></div><button type="submit" class="btn btn-primary btn-block">Ajouter le site</button></form>';
 }
 
-echo '</div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';
+echo '</div></div></div>
+
+</div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';
 #sidebar
 $nIncludeSidebar = 1;
 include __DIR__.'/sidebar.php';

@@ -56,8 +56,9 @@ function head($aHead = array()) {
 	if(!empty($aHead['Image']))
 		$sImage = $aHead['Image'];
 	
+	$sColorCss = 'green';#orange,blue,green
 	
-	echo '<!DOCTYPE html><html hreflang="fr"><head><meta charset="UTF-8"><base href="'.URLSITE.'" /><title>'.s($aHead['PageTitre']).'</title><link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"><link rel="shortcut icon" href="'.URLSITE.'favicon.ico"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="'.$sRobots.'" /><meta name="description" content="'.s($aHead['MetaDescription']).'" /><meta name="keywords" content="'.s($aHead['MetaKeyword']).'" />';
+	echo '<!DOCTYPE html><html hreflang="fr"><head><meta charset="UTF-8"><base href="'.URLSITE.'" /><title>'.s($aHead['PageTitre']).'</title><link href=\'https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500\' rel=\'stylesheet\' type=\'text/css\'><link href=\'https://fonts.googleapis.com/css?family=Roboto:100,100italic,500,400italic,400,300italic,300,500italic,700\' rel=\'stylesheet\' type=\'text/css\'><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" /><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" /><link rel="stylesheet" type="text/css" href="'.URLSITECSS.'custom.'.$sColorCss.'.css" /><link rel="shortcut icon" href="'.URLSITE.'favicon.ico"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="'.$sRobots.'" /><meta name="description" content="'.s($aHead['MetaDescription']).'" /><meta name="keywords" content="'.s($aHead['MetaKeyword']).'" />';
 	
 	if(isset($aHead['canonical']) and !empty($aHead['canonical']))
 		echo '<link rel="canonical" href="'.$aHead['canonical'].'" />';
@@ -93,7 +94,10 @@ function AfficherFiche($v) {
 	$sImage = hs($v['Image']);
 	$sTitre = hs($v['Titre']);
 	$sDescription = hs($v['Description1']);
-	echo '<div class="media"><div class="media-left"><img class="media-object" src="'.$sImage.'" alt="'.$sTitre.'" style="width:200px;" /></div><div class="media-body"><h3 class="media-heading">'.$sTitre.'</h3><p>'.$sDescription.'</p><p><span class="pull-right"><a href="'.$sUrl.'" title="'.$sTitre.'">Voir la fiche</a></span></p></div></div>';
+	echo '<article class="list-article"><a href="'.$sUrl.'" title="'.$sTitre.'"><div class="article-image" style="background-image:url(\''.$sImage.'\')"></div></a><div class="article-text"><a href="'.$sUrl.'" title="'.$sTitre.'"><h3>'.$sTitre.'</h3></a><p>'.$sDescription.'</p><a href="'.$sUrl.'" title="'.$sTitre.'" class="read-more-a"><i class="fa fa-file-text-o read-more-btn"></i>Voir la fiche</a></div></article>';
+	
+	
+	#echo '<div class="media"><div class="media-left"><img class="media-object" src="'.$sImage.'" alt="'.$sTitre.'" style="width:200px;" /></div><div class="media-body"><h3 class="media-heading">'.$sTitre.'</h3><p>'.$sDescription.'</p><p><span class="pull-right"><a href="'.$sUrl.'" title="'.$sTitre.'">Voir la fiche</a></span></p></div></div>';
 }
 
 function GoogleAnalytics() {

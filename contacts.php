@@ -76,7 +76,7 @@ $sPrenom = '';
 $sMail = '';
 $nSujet = '';
 $sContenu = '';
-echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><h2>Contacts</h2>';
+echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><div class="content"><div class="content-box"><div class="content-box-body"><h2 class="page">Contacts</h2>';
 
 if(!empty($_SESSION['Deconnected']['Contacts']['Done'])) {
 	echo '<div class="alert alert-success mtop4">'.hs($_SESSION['Deconnected']['Contacts']['Done']).'</div>';
@@ -105,7 +105,7 @@ foreach($aNomSujet as $k => $v) {
 }
 echo '</select></div></div><div class="form-group"><label for="contact_message" class="control-label">Message</label><div><textarea name="Contenu" id="contact_message" class="form-control" cols="40" rows="8" required>'.$sContenu.'</textarea></div></div><div class="clearfix"></div><div><button type="submit" class="btn btn-primary btn-block">Envoyer</button></div></form>';
 }
-echo '<div class="clearfix"></div></div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';
+echo '</div></div></div></div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';
 #sidebar
 $nIncludeSidebar = 1;
 include __DIR__.'/sidebar.php';

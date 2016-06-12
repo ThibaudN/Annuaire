@@ -70,7 +70,7 @@ $aHead = array(
 	'next' => $sNext,
 );
 head($aHead);
-echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><h2>'.$sDescriptionH2.'</h2><p>'.nl2br($sDescription).'</p><h2>'.$sSitesH2.'</h2>';
+echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><div class="myBloc"><h2>'.$sDescriptionH2.'</h2><p>'.nl2br($sDescription).'</p></div><div class="myBloc"><h2>'.$sSitesH2.'</h2></div>';
 foreach($sRow as $k => $v) {
 	AfficherFiche($v);
 }

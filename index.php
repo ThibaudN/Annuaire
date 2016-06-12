@@ -20,16 +20,13 @@ $aHead = array(
 	'MetaDescription' => s($sRConfig['HomeMetaDescription'])
 );
 head($aHead);
-echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><h2>'.s($sRConfig['HomeDescriptionH2']).'</h2><p>'.nl2br(s($sRConfig['HomeDescription'])).'</p>';
-
-
-echo '<h2>'.s($sRConfig['HomeSitesH2']).'</h2>';
+echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><div class="content"><div class="myBloc"><h2>'.s($sRConfig['HomeDescriptionH2']).'</h2><p>'.nl2br(s($sRConfig['HomeDescription'])).'</p></div><div class="myBloc"><h2>'.s($sRConfig['HomeSitesH2']).'</h2></div>';
 $rR = "SELECT * FROM ".S_FICHES." WHERE Etat = 1 order by DateValidation DESC LIMIT ".$sRConfig['HomeSitesAffiches'];
 $aArg = array();
 foreach($oSql->GetAll($rR,$aArg) as $k => $v) {
 	AfficherFiche($v);
 }
-echo '</div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';
+echo '</div></div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';
 #sidebar
 $nIncludeSidebar = 1;
 include __DIR__.'/sidebar.php';
