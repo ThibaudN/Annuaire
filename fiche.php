@@ -25,41 +25,9 @@ $aHead = array(
 	'MetaDescription' => s($sR['MetaDescription'])
 );
 head($aHead);
-echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">';
+$oDate = new DateTimeFrench($sR['DateValidation']);
 
-
-
-echo '<div class="content">
-<article class="post-article">
-
-<h2 class="post-title">'.hs($sR['Titre']).'</h2>
-<img src="'.$sR['Image'].'" alt="'.hs($sR['Titre']).'" class="img-responsive pull-right" style="max-width:350px;margin-left:20px;" /><p class="post-text">'.nl2br(hs($sR['Description2'])).'</p>
-
-<ul class="share-post">
-<li><i class="fa fa-arrow-up"></i><span>Voir le site : <a href="'.hs($sR['Url']).'" title="'.hs($sR['Url']).'">'.hs($sR['Url']).'</a></span></li>
-</ul>
-
-<ul class="post-info"><li><i class="fa fa-calendar-o"></i><span><time datetime="'.substr($sR['DateValidation'],0,10).'" itemprop="datePublished">21 April 2016</time></span></li><li><i class="fa fa-bars"></i><a href="/'.s($aCategories[$sR['idCategorie']]['TitreUrl']).'.html"><span>'.s($aCategories[$sR['idCategorie']]['Titre']).'</span></a></li></ul>
-</article>
-
-                    
-</div>';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#echo '<h2>'.hs($sR['Titre']).'</h2><img src="'.$sR['Image'].'" alt="'.hs($sR['Titre']).'" class="img-responsive pull-right" style="max-width:350px;margin-left:20px;" />'.nl2br(hs($sR['Description2'])).'<h4>Voir le site : <a href="'.hs($sR['Url']).'" title="'.hs($sR['Url']).'">'.hs($sR['Url']).'</a></h4>';
-
+echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"><div class="content"><article class="post-article"><h2 class="post-title">'.hs($sR['Titre']).'</h2><img src="'.$sR['Image'].'" alt="'.hs($sR['Titre']).'" class="img-responsive pull-right" style="max-width:350px;margin-left:20px;" /><p class="post-text">'.nl2br(hs($sR['Description2'])).'</p><ul class="share-post"><li><i class="fa fa-arrow-up"></i><span>Voir le site : <a href="'.hs($sR['Url']).'" title="'.hs($sR['Url']).'">'.hs($sR['Url']).'</a></span></li></ul><ul class="post-info"><li><i class="fa fa-calendar-o"></i><span><time datetime="'.substr($sR['DateValidation'],0,10).'" itemprop="datePublished">'.$oDate->format('l j F Y').'</time></span></li><li><i class="fa fa-bars"></i><a href="/'.s($aCategories[$sR['idCategorie']]['TitreUrl']).'.html"><span>'.s($aCategories[$sR['idCategorie']]['Titre']).'</span></a></li></ul></article></div>';
 
 #autre fiches meme catégories ?
 /*$rR = "SELECT * FROM ".S_FICHES." WHERE idCategorie = ? and Etat = 1 and id != ? order by rand() limit 3";
