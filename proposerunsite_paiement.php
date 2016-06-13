@@ -42,7 +42,6 @@ else {
 	else {
 		echo '<div class="alert alert-warning"><p>Votre fiche est en attente de modération.</p></div>';
 	}
-
 	echo '</div></div><div class="content-box"><div class="content-box-body"><h2>Votre fiche</h2><p><strong>Catégorie</strong> :: '.hs($aCategories[$sR['idCategorie']]['Titre']).'<br /><strong>Url</strong> :: '.hs($sR['Url']).'<br /><strong>Titre</strong> :: '.hs($sR['Titre']).'<br /><br /><strong>Description Courte</strong> :: '.nl2br(hs($sR['Description1'])).'<br /><br /><strong>Description Longue</strong> :: '.nl2br(hs($sR['Description2'])).'<br />';
 }
 echo '</div></div></div></div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">';

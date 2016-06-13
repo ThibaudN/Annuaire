@@ -83,8 +83,7 @@ if(!empty($_SESSION['Deconnected']['Contacts']['Done'])) {
 	unset($_SESSION['Deconnected']['Contacts']['Done']);
 }
 else {
-	echo '<p>Pour nous contacter, il vous suffit de remplir correctement ce formulaire.</p>
-<form action="'.PAGE.'?action=1" method="post" class="">';
+	echo '<p>Pour nous contacter, il vous suffit de remplir correctement ce formulaire.</p><form action="'.PAGE.'?action=1" method="post" class="">';
 if(!empty($_SESSION['Deconnected']['Contacts']['Erreur'])) {
 	$sNom = $_SESSION['Deconnected']['Contacts']['Nom'];
 	$sPrenom = $_SESSION['Deconnected']['Contacts']['Prenom'];
