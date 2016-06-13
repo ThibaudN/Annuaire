@@ -99,7 +99,7 @@ $sUrl = '';
 $sMailExpediteur = '';
 $sMotDePasse = '$@lùtçàvà';
 if(isset($_SERVER['HTTP_HOST'])) {
-	$sUrl = $_SERVER['HTTP_HOST'].'/';
+	$sUrl = $_SERVER['HTTP_HOST'].'';
 	$aDomaine = explode('.',$_SERVER['HTTP_HOST']);
 	$nCount = count($aDomaine);
 	$sDomaine = $aDomaine[$nCount-2].'.'.$aDomaine[$nCount-1];
