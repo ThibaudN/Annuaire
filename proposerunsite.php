@@ -139,7 +139,7 @@ elseif(!empty($_GET['action']) and is_numeric($_GET['action'])) {
 	$sMail = $_POST['Mail'];
 	$sMetaTitle = s($sRConfig['FicheMetaTitle']);
 	$sMetaTitle = str_replace("::NOMSITE",$sUrlTitre,$sMetaTitle);
-	$sMetaDescription = s($sRConfig['FicheMetaTitle']);
+	$sMetaDescription = s($sRConfig['FicheMetaDescription']);
 	$sMetaDescription = str_replace("::NOMSITE",$sUrlTitre,$sMetaDescription);
 	$sMetaDescription = str_replace("::NOMCATEGORIE",s($aCategories[hs($_POST['Categorie'])]['Titre']),$sMetaDescription);
 	$rR = "INSERT INTO ".S_FICHES." (idCategorie,Url,Titre,TitreUrl,Description1,Description2,MetaTitle,MetaDescription,Mail,KeyGen,KeyGenMail,Ip,Date,Etat) values (?,?,?,?,?,?,?,?,?,?,?,?,now(),5)";
