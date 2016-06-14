@@ -13,8 +13,7 @@ foreach($aCategories as $k => $v) {
 echo '</ul></div></div>';
 
 
-
-
+echo '<div class="search"><form action="search.php?action=1" method="post"><input type="text" class="search-input" placeholder="Rechercher" name="Rechercher"><button style="" type="submit"><div class="search-btn" style=""><i class="fa fa-search"></i></div></button></form></div>';
 
 $rR = "SELECT * FROM ".S_SIDEBAR." ORDER BY Ordre ASC";
 $sRowLiens = $oSql->GetAll($rR);

@@ -34,7 +34,7 @@ elseif(!empty($_GET['erreur']) and is_numeric($_GET['erreur'])) {
 }
 else {
 	if($sR['Etat'] == 4) {
-		$sDescriptionPaiement = s($sRConfig['DescriptionPaiement']);
+		$sDescriptionPaiement = s($sRConfig['PaiementDescription']);
 		$sDescriptionPaiement = str_replace("::PRIX",hs($sRConfig['PaypalPrix']).' '.hs($sRConfig['PaypalMonnaie']),$sDescriptionPaiement);
 		
 		echo '<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">'.$sDescriptionPaiement.'</div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="'.hs($sRConfig['PaypalBoutonId']).'"><input type="hidden" name="custom" value="'.hs($sR['KeyGen']).'" /><input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne"><img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1"></form></div></div>';
