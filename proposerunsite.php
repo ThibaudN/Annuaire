@@ -176,7 +176,7 @@ else {
 	$sQuestion = '';
 	echo '<h2 class="page">Proposer un site</h2>';
 
-	echo '<div class="alert alert-warning">Proposer son site est payant.</div>';
+	echo '<div class="alert alert-warning">Proposer son site coûte '.$sRConfig['PaypalPrix'].' '.$sRConfig['PaypalMonnaie'].'.</div>';
 
 	if(!empty($_SESSION['Deconnected']['ProposerUnSite']['Erreur'])) {
 		$sCategorie = $_SESSION['Deconnected']['ProposerUnSite']['Categorie'];

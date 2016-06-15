@@ -320,7 +320,7 @@ if($sR['Etat'] != 6)
 
 
 if($sR['Etat'] == 3) {
-	echo '<h2>Modération</h2><a href="'.PAGE.'?id='.$sR['id'].'&accepter=1" title="Accepter" class="btn btn-block btn-success"><i class="fa fa-check"></i> Accepter</a>';
+	echo '<a href="'.PAGE.'?id='.$sR['id'].'&modif=1#form" title="Modifier" class="btn btn-block btn-primary"><i class="fa fa-edit"></i> Modifier</a><h2>Modération</h2><a href="'.PAGE.'?id='.$sR['id'].'&accepter=1" title="Accepter" class="btn btn-block btn-success"><i class="fa fa-check"></i> Accepter</a>';
 	foreach($aRaisonsRefus as $k => $v)
 		echo '<a href="'.PAGE.'?id='.$sR['id'].'&refuser='.$k.'" title="Refuser" class="btn btn-block btn-danger"><i class="fa fa-times"></i> Refuser ('.$v.')</a>';
 }
