@@ -33,7 +33,9 @@ elseif(!empty($_GET['add']) and is_numeric($_GET['add'])) {
 	function GetData() {
 		$_SESSION['ADMConnected']['AddCat']['Titre'] = (!isset($_POST['Titre']) ? '' : s($_POST['Titre']));
 		$_SESSION['ADMConnected']['AddCat']['TitreUrl'] = (!isset($_POST['TitreUrl']) ? '' : s($_POST['TitreUrl']));
+		$_SESSION['ADMConnected']['AddCat']['DescriptionH2'] = (!isset($_POST['DescriptionH2']) ? '' : s($_POST['DescriptionH2']));
 		$_SESSION['ADMConnected']['AddCat']['Description'] = (!isset($_POST['Description']) ? '' : s($_POST['Description']));
+		$_SESSION['ADMConnected']['AddCat']['SitesH2'] = (!isset($_POST['SitesH2']) ? '' : s($_POST['SitesH2']));
 		$_SESSION['ADMConnected']['AddCat']['MetaTitle'] = (!isset($_POST['MetaTitle']) ? '' : s($_POST['MetaTitle']));
 		$_SESSION['ADMConnected']['AddCat']['MetaDescription'] = (!isset($_POST['MetaDescription']) ? '' : s($_POST['MetaDescription']));
 		$_SESSION['ADMConnected']['AddCat']['ParPage'] = (!isset($_POST['ParPage']) ? '' : s($_POST['ParPage']));
@@ -50,9 +52,21 @@ elseif(!empty($_GET['add']) and is_numeric($_GET['add'])) {
 		header('location: '.PAGE.'?form=1');
 		exit;
 	}
+	elseif(empty($_POST['DescriptionH2'])) {
+		GetData();
+		$_SESSION['ADMConnected']['Erreur'] = 'Le H2 lié à la description de la catégorie est vide.';
+		header('location: '.PAGE.'?form=1');
+		exit;
+	}
 	elseif(empty($_POST['Description'])) {
 		GetData();
 		$_SESSION['ADMConnected']['Erreur'] = 'La description est vide.';
+		header('location: '.PAGE.'?form=1');
+		exit;
+	}
+	elseif(empty($_POST['SitesH2'])) {
+		GetData();
+		$_SESSION['ADMConnected']['Erreur'] = 'Le H2 lié aux sites listés est vide.';
 		header('location: '.PAGE.'?form=1');
 		exit;
 	}
@@ -93,8 +107,8 @@ elseif(!empty($_GET['add']) and is_numeric($_GET['add'])) {
 		header('location: '.PAGE.'?form=1');
 		exit;
 	}
-	$rR = "INSERT INTO ".S_CATEGORIES." (Titre,TitreUrl,Description,MetaTitle,MetaDescription,ParPage,Online) values (?,?,?,?,?,?,0)";
-	$aArg = array(s($_POST['Titre']),$sUrlInterne,$_POST['Description'],$_POST['MetaTitle'],$_POST['MetaDescription'],$_POST['ParPage']);
+	$rR = "INSERT INTO ".S_CATEGORIES." (Titre,TitreUrl,DescriptionH2,Description,SitesH2,MetaTitle,MetaDescription,ParPage,Online) values (?,?,?,?,?,?,?,?,0)";
+	$aArg = array(s($_POST['Titre']),$sUrlInterne,$_POST['DescriptionH2'],$_POST['Description'],$_POST['SitesH2'],$_POST['MetaTitle'],$_POST['MetaDescription'],$_POST['ParPage']);
 	$nID = $oSql->QueryIns($rR,$aArg);
 	
 	header('location: '.PAGE.'?id='.$nID);
@@ -104,7 +118,9 @@ elseif(!empty($_GET['edit']) and is_numeric($_GET['edit'])) {
 	function GetData() {
 		$_SESSION['ADMConnected']['AddCat']['Titre'] = (!isset($_POST['Titre']) ? '' : s($_POST['Titre']));
 		$_SESSION['ADMConnected']['AddCat']['TitreUrl'] = (!isset($_POST['TitreUrl']) ? '' : s($_POST['TitreUrl']));
+		$_SESSION['ADMConnected']['AddCat']['DescriptionH2'] = (!isset($_POST['DescriptionH2']) ? '' : s($_POST['DescriptionH2']));
 		$_SESSION['ADMConnected']['AddCat']['Description'] = (!isset($_POST['Description']) ? '' : s($_POST['Description']));
+		$_SESSION['ADMConnected']['AddCat']['SitesH2'] = (!isset($_POST['SitesH2']) ? '' : s($_POST['SitesH2']));
 		$_SESSION['ADMConnected']['AddCat']['MetaTitle'] = (!isset($_POST['MetaTitle']) ? '' : s($_POST['MetaTitle']));
 		$_SESSION['ADMConnected']['AddCat']['MetaDescription'] = (!isset($_POST['MetaDescription']) ? '' : s($_POST['MetaDescription']));
 		$_SESSION['ADMConnected']['AddCat']['ParPage'] = (!isset($_POST['ParPage']) ? '' : s($_POST['ParPage']));
@@ -132,9 +148,21 @@ elseif(!empty($_GET['edit']) and is_numeric($_GET['edit'])) {
 		header('location: '.PAGE.'?form=1&modif='.$aCat['id']);
 		exit;
 	}
+	elseif(empty($_POST['DescriptionH2'])) {
+		GetData();
+		$_SESSION['ADMConnected']['Erreur'] = 'Le H2 lié à la description de la catégorie est vide.';
+		header('location: '.PAGE.'?form=1&modif='.$aCat['id']);
+		exit;
+	}
 	elseif(empty($_POST['Description'])) {
 		GetData();
 		$_SESSION['ADMConnected']['Erreur'] = 'La description est vide.';
+		header('location: '.PAGE.'?form=1&modif='.$aCat['id']);
+		exit;
+	}
+	elseif(empty($_POST['SitesH2'])) {
+		GetData();
+		$_SESSION['ADMConnected']['Erreur'] = 'Le H2 lié aux sites listés est vide.';
 		header('location: '.PAGE.'?form=1&modif='.$aCat['id']);
 		exit;
 	}
@@ -176,8 +204,8 @@ elseif(!empty($_GET['edit']) and is_numeric($_GET['edit'])) {
 		exit;
 	}
 	
-	$rR = "UPDATE ".S_CATEGORIES." SET Titre = ?,TitreUrl = ?,Description = ?,MetaTitle = ?,MetaDescription = ?,ParPage = ? where id = ?";
-	$aArg = array(s($_POST['Titre']),$sUrlInterne,$_POST['Description'],$_POST['MetaTitle'],$_POST['MetaDescription'],$_POST['ParPage'],$aCat['id']);
+	$rR = "UPDATE ".S_CATEGORIES." SET Titre = ?,TitreUrl = ?,DescriptionH2 = ?,Description = ?,SitesH2 = ?,MetaTitle = ?,MetaDescription = ?,ParPage = ? where id = ?";
+	$aArg = array(s($_POST['Titre']),$sUrlInterne,$_POST['DescriptionH2'],$_POST['Description'],$_POST['SitesH2'],$_POST['MetaTitle'],$_POST['MetaDescription'],$_POST['ParPage'],$aCat['id']);
 	$oSql->Query($rR,$aArg);
 	$_SESSION['ADMConnected']['Done'] = 'La catégorie a été modifié.'; 
 	header('location: '.PAGE.'?id='.$aCat['id']);
@@ -209,7 +237,9 @@ if(!empty($_GET['form']) and is_numeric($_GET['form'])) {
 	$sHidden = '';
 	$sTitre = '';
 	$sTitreUrl = '';
+	$sDescriptionH2 = '';
 	$sDescription = '';
+	$sSitesH2 = '';
 	$sMetaTitle = '';
 	$sMetaDescription = '';
 	$sParPage = 20;
@@ -223,7 +253,9 @@ if(!empty($_GET['form']) and is_numeric($_GET['form'])) {
 			$sHidden = '<input type="hidden" name="nId" value="'.$aCat['id'].'" readonly="readonly" />';
 			$sTitre = s($aCat['Titre']);
 			$sTitreUrl = s($aCat['TitreUrl']);
+			$sDescriptionH2 = s($aCat['DescriptionH2']);
 			$sDescription = s($aCat['Description']);
+			$sSitesH2 = s($aCat['SitesH2']);
 			$sMetaTitle = s($aCat['MetaTitle']);
 			$sMetaDescription = s($aCat['MetaDescription']);
 			$sParPage = s($aCat['ParPage']);
@@ -232,13 +264,15 @@ if(!empty($_GET['form']) and is_numeric($_GET['form'])) {
 	if(isset($_SESSION['ADMConnected']['AddCat'])) {
 		$sTitre = s($_SESSION['ADMConnected']['AddCat']['Titre']);
 		$sTitreUrl = s($_SESSION['ADMConnected']['AddCat']['TitreUrl']);
+		$sDescriptionH2 = s($_SESSION['ADMConnected']['AddCat']['DescriptionH2']);
 		$sDescription = s($_SESSION['ADMConnected']['AddCat']['Description']);
+		$sSitesH2 = s($_SESSION['ADMConnected']['AddCat']['SitesH2']);
 		$sMetaTitle = s($_SESSION['ADMConnected']['AddCat']['MetaTitle']);
 		$sMetaDescription = s($_SESSION['ADMConnected']['AddCat']['MetaDescription']);
 		$sParPage = s($_SESSION['ADMConnected']['AddCat']['ParPage']);
 		unset($_SESSION['ADMConnected']['AddCat']);
 	}
-	echo '<h2>'.$sBtn.' une catégorie</h2><form method="post" action="'.PAGE.'?'.$sAct.'=1">'.$sHidden.'<div class="form-group"><label for="Titre" class="control-label">Titre</label><input type="text" name="Titre" id="Titre" class="form-control" value="'.$sTitre.'" required></div><div class="form-group"><label for="TitreUrl" class="control-label">Url interne</label><input type="text" name="TitreUrl" id="TitreUrl" class="form-control" value="'.$sTitreUrl.'" required></div><div class="form-group"><label for="ParPage" class="control-label">Items par Page</label><input type="text" name="ParPage" id="ParPage" class="form-control" value="'.$sParPage.'" required></div><div class="form-group"><label for="Description" class="control-label">Description</label><textarea name="Description" id="Description" class="form-control" placeholder="Cette description affichée sur sa page de catégorie" cols="40" rows="8" required>'.$sDescription.'</textarea></div><div class="form-group"><label for="MetaTitle" class="control-label">Meta Title</label><input type="text" name="MetaTitle" id="MetaTitle" class="form-control" value="'.$sMetaTitle.'" placeholder="balise html title" required></div><div class="form-group"><label for="MetaDescription" class="control-label">Meta Description</label><textarea name="MetaDescription" id="MetaDescription" class="form-control" placeholder="balise meta description" cols="40" rows="8" required>'.$sMetaDescription.'</textarea></div><button type="submit" class="btn btn-primary btn-block">'.$sBtn.' la catégorie</button></form><hr />';
+	echo '<h2>'.$sBtn.' une catégorie</h2><form method="post" action="'.PAGE.'?'.$sAct.'=1">'.$sHidden.'<div class="form-group"><label for="Titre" class="control-label">Titre</label><input type="text" name="Titre" id="Titre" class="form-control" value="'.$sTitre.'" required></div><div class="form-group"><label for="TitreUrl" class="control-label">Url interne</label><input type="text" name="TitreUrl" id="TitreUrl" class="form-control" value="'.$sTitreUrl.'" required></div><div class="form-group"><label for="ParPage" class="control-label">Items par Page</label><input type="text" name="ParPage" id="ParPage" class="form-control" value="'.$sParPage.'" required></div><div class="form-group"><label for="DescriptionH2" class="control-label">H2 Description</label><input type="text" name="DescriptionH2" id="DescriptionH2" class="form-control" value="'.$sDescriptionH2.'" placeholder="H2 au dessus de la description" required></div><div class="form-group"><label for="Description" class="control-label">Description</label><textarea name="Description" id="Description" class="form-control" placeholder="Cette description affichée sur sa page de catégorie" cols="40" rows="8" required>'.$sDescription.'</textarea></div><div class="form-group"><label for="SitesH2" class="control-label">H2 Sites</label><input type="text" name="SitesH2" id="SitesH2" class="form-control" value="'.$sSitesH2.'" placeholder="H2 au dessus des sites listés" required></div><div class="form-group"><label for="MetaTitle" class="control-label">Meta Title</label><input type="text" name="MetaTitle" id="MetaTitle" class="form-control" value="'.$sMetaTitle.'" placeholder="balise html title" required></div><div class="form-group"><label for="MetaDescription" class="control-label">Meta Description</label><input type="text" name="MetaDescription" id="MetaDescription" class="form-control" value="'.$sMetaDescription.'" placeholder="balise meta description" required></div><button type="submit" class="btn btn-primary btn-block">'.$sBtn.' la catégorie</button></form><hr />';
 }
 
 elseif(!empty($_GET['id']) and is_numeric($_GET['id'])) {
@@ -246,7 +280,7 @@ elseif(!empty($_GET['id']) and is_numeric($_GET['id'])) {
 	$aArg = array($_GET['id']);
 	$aCat = $oSql->GetLine($rR,$aArg);
 	if(!empty($aCat))
-		echo '<h2>La catégorie '.$aCat['Titre'].'</h2><table class="table table-striped"><tbody><tr><td width="20%">Titre</td><td>'.hs($aCat['Titre']).'</td></tr><tr><td>Url</td><td>'.hs($aCat['TitreUrl']).'</td></tr><tr><td>Items par page</td><td>'.hs($aCat['ParPage']).'</td></tr><tr><td>Etat</td><td><span class="label label-'.$aClassCategories[$aCat['Online']].'">'.s($aEtatCategories[$aCat['Online']]).'</span></td></tr><tr><td>Sites en ligne</td><td>'.hs($aCat['Sites']).'</td></tr><tr><td>Description</td><td>'.hs($aCat['Description']).'</td></tr><tr><td>Meta Title</td><td>'.hs($aCat['MetaTitle']).'</td></tr><tr><td>Meta Description</td><td>'.hs($aCat['MetaDescription']).'</td></tr></tbody></table><hr />';
+		echo '<h2>La catégorie '.$aCat['Titre'].'</h2><table class="table table-striped"><tbody><tr><td width="20%">Titre</td><td>'.hs($aCat['Titre']).'</td></tr><tr><td>Url</td><td>'.hs($aCat['TitreUrl']).'</td></tr><tr><td>Items par page</td><td>'.hs($aCat['ParPage']).'</td></tr><tr><td>Etat</td><td><span class="label label-'.$aClassCategories[$aCat['Online']].'">'.s($aEtatCategories[$aCat['Online']]).'</span></td></tr><tr><td>Sites en ligne</td><td>'.hs($aCat['Sites']).'</td></tr><tr><td>H2 Description</td><td>'.hs($aCat['DescriptionH2']).'</td></tr><tr><td>Description</td><td>'.hs($aCat['Description']).'</td></tr><tr><td>H2 Sites</td><td>'.hs($aCat['SitesH2']).'</td></tr><tr><td>Meta Title</td><td>'.hs($aCat['MetaTitle']).'</td></tr><tr><td>Meta Description</td><td>'.hs($aCat['MetaDescription']).'</td></tr></tbody></table><hr />';
 }
 
 echo '<h2>Les catégories</h2>
