@@ -83,7 +83,7 @@ elseif(!empty($_GET['add']) and is_numeric($_GET['add'])) {
 		header('location: '.PAGE.'?form=1');
 		exit;
 	}
-	$sUrlInterne = clean_url(hs($_POST['Titre']));
+	$sUrlInterne = hs($_POST['TitreUrl']);
 	$rR = "SELECT * FROM ".S_CATEGORIES." where TitreUrl = ?";
 	$aArg = array($sUrlInterne);
 	$sRVerif = $oSql->GetLine($rR,$aArg);
@@ -165,7 +165,7 @@ elseif(!empty($_GET['edit']) and is_numeric($_GET['edit'])) {
 		header('location: '.PAGE.'?form=1&modif='.$aCat['id']);
 		exit;
 	}
-	$sUrlInterne = clean_url(hs($_POST['Titre']));
+	$sUrlInterne = hs($_POST['TitreUrl']);
 	$rR = "SELECT * FROM ".S_CATEGORIES." where TitreUrl = ? and id != ?";
 	$aArg = array($sUrlInterne,$aCat['id']);
 	$sRVerif = $oSql->GetLine($rR,$aArg);
